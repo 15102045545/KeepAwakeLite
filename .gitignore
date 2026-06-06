@@ -32,3 +32,4 @@ private_keys
 *.njsproj
 *.sln
 *.sw?
+/1.txt
