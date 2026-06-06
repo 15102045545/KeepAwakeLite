@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family:
+    "Segoe UI Variable",
+    "Segoe UI",
+    "PingFang SC",
+    "Microsoft YaHei UI",
+    "Microsoft YaHei",
+    sans-serif;
+  color: #1f252a;
+  background: #eef3f4;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 960px;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.window-shell {
+  backdrop-filter: blur(18px);
+}
+
+.hero-band {
+  background: linear-gradient(
+    90deg,
+    rgba(239, 248, 244, 0.98),
+    rgba(248, 250, 252, 0.98) 50%,
+    rgba(243, 247, 255, 0.98)
+  );
+}
+
+.console-panel {
+  background: linear-gradient(180deg, #141d20 0%, #0f1517 100%);
+}

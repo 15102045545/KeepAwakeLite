@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KeepAwakeLite Windows UI Prototype</title>
+    <link rel="icon" href="data:," />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --font-sans: "Segoe UI Variable", "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+        --font-mono: "Cascadia Mono", "Consolas", "SF Mono", monospace;
+        --color-ink: #1f252a;
+        --color-muted: #64717b;
+        --color-panel: #ffffff;
+        --color-line: #d7e0e5;
+        --color-field: #edf2f5;
+        --color-run: #14855b;
+        --color-stop: #c83b34;
+        --color-accent: #2563eb;
+        --color-console: #101719;
+      }
+    </style>
+    <style>
+      body {
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 18% 18%, rgba(37, 99, 235, 0.18), transparent 32%),
+          radial-gradient(circle at 86% 78%, rgba(20, 133, 91, 0.16), transparent 30%),
+          linear-gradient(135deg, #e9f0f5 0%, #f5f7fa 42%, #e6edf2 100%);
+      }
+
+      .win-shadow {
+        box-shadow:
+          0 34px 92px rgba(24, 35, 43, 0.18),
+          0 2px 8px rgba(24, 35, 43, 0.08);
+      }
+
+      .mica {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(247, 250, 252, 0.92)),
+          rgba(255, 255, 255, 0.82);
+        backdrop-filter: blur(18px);
+      }
+
+      .hero-band {
+        background:
+          linear-gradient(90deg, rgba(239, 248, 244, 0.98), rgba(248, 250, 252, 0.98) 50%, rgba(243, 247, 255, 0.98));
+      }
+
+      .console {
+        background:
+          linear-gradient(180deg, #141d20 0%, #0f1517 100%);
+      }
+    </style>
+  </head>
+  <body class="font-sans text-ink antialiased">
+    <main class="flex min-h-screen items-center justify-center p-8">
+      <section class="win-shadow mica w-[1220px] overflow-hidden rounded-xl border border-white/80">
+        <header class="flex h-12 items-center border-b border-line/80 bg-white/70 pl-4">
+          <div class="flex h-7 w-7 items-center justify-center rounded-md bg-accent text-[13px] font-bold text-white">K</div>
+          <div class="ml-3 text-[13px] font-semibold">KeepAwakeLite</div>
+          <div class="ml-4 flex h-7 items-center gap-2 rounded-md bg-emerald-50 px-3 text-[13px] font-medium text-emerald-700">
+            <span class="h-2 w-2 rounded-full bg-run"></span>
+            运行中
+          </div>
+          <div class="ml-auto flex h-12 text-[13px] text-slate-700">
+            <button class="flex w-12 items-center justify-center hover:bg-slate-100" aria-label="最小化">─</button>
+            <button class="flex w-12 items-center justify-center hover:bg-slate-100" aria-label="最大化">□</button>
+            <button class="flex w-12 items-center justify-center hover:bg-red-500 hover:text-white" aria-label="关闭">×</button>
+          </div>
+        </header>
+
+        <div class="px-7 pb-7 pt-6">
+          <section class="hero-band grid grid-cols-[1fr_0.9fr_0.9fr_0.75fr_auto] items-center gap-6 rounded-lg border border-line bg-white px-7 py-5">
+            <div>
+              <div class="text-[13px] font-semibold text-muted">本次运行时长</div>
+              <div class="mt-2 font-mono text-[32px] font-bold leading-none">00:42:18</div>
+            </div>
+            <div class="border-l border-line pl-6">
+              <div class="text-[13px] font-semibold text-muted">当前循环</div>
+              <div class="mt-2 text-[32px] font-bold leading-none">第 42 轮</div>
+            </div>
+            <div class="border-l border-line pl-6">
+              <div class="text-[13px] font-semibold text-muted">下一轮</div>
+              <div class="mt-2 font-mono text-[32px] font-bold leading-none">00:00:37</div>
+            </div>
+            <div class="border-l border-line pl-6">
+              <div class="text-[13px] font-semibold text-muted">固定周期</div>
+              <div class="mt-2 font-mono text-[32px] font-bold leading-none">60s</div>
+            </div>
+            <button class="flex h-14 w-32 items-center justify-center gap-3 rounded-md bg-stop text-[17px] font-semibold text-white shadow-sm shadow-red-900/10">
+              <span class="h-3.5 w-3.5 rounded-[3px] bg-white"></span>
+              停止
+            </button>
+          </section>
+
+          <section class="mt-6 grid grid-cols-4 gap-4">
+            <article class="rounded-lg border border-line bg-panel p-5">
+              <div class="flex items-center justify-between">
+                <div class="text-[14px] font-semibold">CPU 使用率</div>
+                <span class="h-2.5 w-2.5 rounded-full bg-run"></span>
+              </div>
+              <div class="mt-4 font-mono text-[28px] font-bold">3.8%</div>
+              <div class="mt-4 h-2 rounded-full bg-field">
+                <div class="h-2 w-[11%] rounded-full bg-run"></div>
+              </div>
+              <div class="mt-2 text-xs text-muted">低负载轻计算</div>
+            </article>
+
+            <article class="rounded-lg border border-line bg-panel p-5">
+              <div class="flex items-center justify-between">
+                <div class="text-[14px] font-semibold">内存</div>
+                <span class="h-2.5 w-2.5 rounded-full bg-sky-500"></span>
+              </div>
+              <div class="mt-4 font-mono text-[28px] font-bold">8.4 / 32 GB</div>
+              <div class="mt-4 h-2 rounded-full bg-field">
+                <div class="h-2 w-[26%] rounded-full bg-sky-500"></div>
+              </div>
+              <div class="mt-2 text-xs text-muted">小块分配后释放</div>
+            </article>
+
+            <article class="rounded-lg border border-line bg-panel p-5">
+              <div class="flex items-center justify-between">
+                <div class="text-[14px] font-semibold">磁盘可用空间</div>
+                <span class="h-2.5 w-2.5 rounded-full bg-amber-500"></span>
+              </div>
+              <div class="mt-4 font-mono text-[28px] font-bold">418 GB</div>
+              <div class="mt-4 h-2 rounded-full bg-field">
+                <div class="h-2 w-[68%] rounded-full bg-amber-500"></div>
+              </div>
+              <div class="mt-2 text-xs text-muted">临时文件每轮删除</div>
+            </article>
+
+            <article class="rounded-lg border border-line bg-panel p-5">
+              <div class="flex items-center justify-between">
+                <div class="text-[14px] font-semibold">本进程内存</div>
+                <span class="h-2.5 w-2.5 rounded-full bg-violet-500"></span>
+              </div>
+              <div class="mt-4 font-mono text-[28px] font-bold">92 MB</div>
+              <div class="mt-4 h-2 rounded-full bg-field">
+                <div class="h-2 w-[14%] rounded-full bg-violet-500"></div>
+              </div>
+              <div class="mt-2 text-xs text-muted">最近 1000 条日志</div>
+            </article>
+
+          </section>
+
+          <section class="mt-6 grid grid-cols-[360px_1fr] gap-5">
+            <aside class="rounded-lg border border-line bg-panel p-5">
+              <div class="flex items-center justify-between">
+                <h2 class="text-[15px] font-semibold">当前循环动作</h2>
+                <span class="rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-muted">固定顺序</span>
+              </div>
+              <div class="mt-6 space-y-4">
+                <div class="flex items-center gap-4 rounded-md border border-line bg-slate-50 px-4 py-3">
+                  <span class="flex h-7 w-7 items-center justify-center rounded-md bg-emerald-100 text-sm font-bold text-run">✓</span>
+                  <div>
+                    <div class="font-semibold">CPU 轻计算</div>
+                    <div class="text-xs text-muted">固定次数校验和</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4 rounded-md border border-line bg-slate-50 px-4 py-3">
+                  <span class="flex h-7 w-7 items-center justify-center rounded-md bg-sky-100 text-sm font-bold text-sky-700">✓</span>
+                  <div>
+                    <div class="font-semibold">内存分配释放</div>
+                    <div class="text-xs text-muted">单轮作用域内完成</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4 rounded-md border border-line bg-slate-50 px-4 py-3">
+                  <span class="flex h-7 w-7 items-center justify-center rounded-md bg-amber-100 text-sm font-bold text-amber-700">✓</span>
+                  <div>
+                    <div class="font-semibold">临时文件读写</div>
+                    <div class="text-xs text-muted">完成后立即删除</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4 rounded-md border border-line bg-slate-50 px-4 py-3">
+                  <span class="flex h-7 w-7 items-center justify-center rounded-md bg-blue-100 text-sm font-bold text-accent">✓</span>
+                  <div>
+                    <div class="font-semibold">百度短请求</div>
+                    <div class="text-xs text-muted">HEAD / 轻量 GET，短超时</div>
+                  </div>
+                </div>
+              </div>
+            </aside>
+
+            <section class="console overflow-hidden rounded-lg border border-slate-900">
+              <div class="flex h-11 items-center border-b border-white/5 px-5">
+                <h2 class="text-[15px] font-semibold text-white">软件运行日志</h2>
+                <div class="ml-auto text-xs text-slate-400">全部应用日志，内存最近 1000 条</div>
+              </div>
+              <div class="space-y-3 px-5 py-5 font-mono text-[13px]">
+                <p><span class="text-slate-500">[12:30:05]</span> <span class="ml-4 font-bold text-emerald-300">INFO</span> <span class="ml-5 text-emerald-50">后端任务已开始，循环周期 60 秒</span></p>
+                <p><span class="text-slate-500">[12:30:05]</span> <span class="ml-4 font-bold text-emerald-300">INFO</span> <span class="ml-5 text-emerald-50">sysinfo 采样已启动，刷新周期 5 秒</span></p>
+                <p><span class="text-slate-500">[12:30:07]</span> <span class="ml-4 font-bold text-emerald-300">INFO</span> <span class="ml-5 text-emerald-50">第 42 轮：CPU 轻计算完成，用时 18ms</span></p>
+                <p><span class="text-slate-500">[12:30:07]</span> <span class="ml-4 font-bold text-emerald-300">INFO</span> <span class="ml-5 text-emerald-50">第 42 轮：内存小块校验完成，已释放</span></p>
+                <p><span class="text-slate-500">[12:30:07]</span> <span class="ml-4 font-bold text-emerald-300">INFO</span> <span class="ml-5 text-emerald-50">第 42 轮：临时文件读写完成，已删除</span></p>
+                <p><span class="text-slate-500">[12:30:08]</span> <span class="ml-4 font-bold text-amber-300">WARN</span> <span class="ml-5 text-emerald-50">第 42 轮：百度短请求超时，继续下一轮</span></p>
+                <p><span class="text-slate-500">[12:30:10]</span> <span class="ml-4 font-bold text-emerald-300">INFO</span> <span class="ml-5 text-emerald-50">监控采样：CPU 3.8%，本进程内存 92MB</span></p>
+              </div>
+            </section>
+          </section>
+
+          <footer class="mt-6 grid h-10 grid-cols-4 items-center rounded-lg border border-line bg-white/80 px-5 text-sm text-muted">
+            <div class="flex items-center gap-3">
+              <span class="h-2.5 w-2.5 rounded-full bg-run"></span>
+              用户手动开启，低负载运行
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="h-2.5 w-2.5 rounded-full bg-amber-500"></span>
+              关闭窗口将优雅停止并退出
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="h-2.5 w-2.5 rounded-full bg-accent"></span>
+              托盘菜单仅显示窗口 / 退出
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="h-2.5 w-2.5 rounded-full bg-violet-500"></span>
+              不保存配置、历史日志或状态
+            </div>
+          </footer>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
