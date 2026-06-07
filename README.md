@@ -32,20 +32,20 @@ npm run dev
 npm run tauri build
 ```
 
-Windows 产物为未签名 NSIS 安装包。macOS 正式产物使用本机 Keychain 中的 Apple 凭据生成 universal DMG。
+Windows 产物为未签名 NSIS 安装包。macOS 产物为本机生成的未签名 Apple Silicon 和 Intel DMG。
 
-macOS 正式发布包由本机生成并上传到 GitHub draft Release：
+macOS 发布包由本机生成并上传到 GitHub draft Release：
 
 ```bash
 npm run release:macos
 ```
 
-脚本会使用本机 Keychain 保存 Apple ID、Team ID 和 App 专用密码，并从本机 Keychain 读取 Developer ID Application 证书。Apple 凭据不进入 GitHub Secrets、代码、文档或终端日志。
+脚本不使用 Apple Developer ID、Apple ID、公证、staple 或 GitHub Secrets。macOS 用户首次打开未签名应用时会看到系统安全提示。
 
 ## GitHub Release
 
 工作流位于 `.github/workflows/release.yml`，触发条件为推送 `v1.0.0` tag 或手动运行。
 
-GitHub Actions 负责验证工程并生成 Windows NSIS 安装包。macOS universal DMG 不在 GitHub Actions 中生成，避免 Apple 公证等待阻塞 hosted runner。
+GitHub Actions 负责验证工程并生成 Windows NSIS 安装包。macOS DMG 由本机脚本生成并上传。
 
-Windows v1.0.0 不做代码签名，因此安装时可能出现 SmartScreen 或未知发布者提示。这是发布限制，不应通过伪造签名或灰色绕过手段处理。
+Windows v1.0.0 不做代码签名，因此安装时可能出现 SmartScreen 或未知发布者提示。macOS v1.0.0 不做 Developer ID 签名或公证，因此安装时可能出现 Gatekeeper 安全提示。
