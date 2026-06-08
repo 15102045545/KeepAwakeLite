@@ -4,7 +4,7 @@
 
 **Goal:** Build the v1.0.0 KeepAwakeLite Tauri desktop app from the existing requirements document.
 
-**Architecture:** React renders one Chinese dashboard and talks to Tauri commands/events. Rust owns the active loop, cancellation, in-memory log emission, sysinfo sampling, tray/menu handling, and temporary-directory cleanup. GitHub Actions builds unsigned Windows NSIS installers and signed/notarized macOS DMGs through repository secrets.
+**Architecture:** React renders one Chinese dashboard and talks to Tauri commands/events. Rust owns the active loop, cancellation, in-memory log emission, sysinfo sampling, tray/menu handling, and temporary-directory cleanup. GitHub Actions builds the unsigned Windows NSIS installer; the local macOS release script builds unsigned Apple Silicon and Intel DMGs and uploads them to the draft GitHub Release.
 
 **Tech Stack:** Tauri v2, React, TypeScript, Vite, Tailwind CSS, lucide-react, Rust, tokio, reqwest, sysinfo.
 
@@ -82,5 +82,5 @@
 
 - [ ] Add GitHub Release workflow for tag `v1.0.0`.
 - [ ] Build Windows x64 NSIS without signing.
-- [ ] Build macOS Apple Silicon and Intel DMGs with signing/notarization secrets.
+- [ ] Build unsigned macOS Apple Silicon and Intel DMGs locally and upload them to the draft Release.
 - [ ] Run `npm run typecheck`, `npm test -- --run`, `npm run build`, and `cargo test` where the local toolchain supports them.

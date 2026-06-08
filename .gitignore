@@ -15,6 +15,7 @@ src-tauri/target
 .xiaokeer
 
 # Signing and notarization credentials
+1.txt
 *.p12
 *.p8
 *.cer
